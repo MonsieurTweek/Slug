@@ -2,10 +2,24 @@
 <html>
 	<head></head>
 	<body>
+		<div id="fps-counter"></div>
 		<canvas id="canvas"></canvas>
 		<script>
-			var canvas = document.getElementById('canvas');
+			var canvas = $('canvas');
 			var ctx = canvas.getContext('2d');
+			var fps = 0, now, lastUpdate = (new Date)*1 - 1;
+			var fpsFilter = 50;
+
+			calculateFPS = function() {
+				var thisFrameFPS = 1000 / ((now=new Date) - lastUpdate);
+				fps += (thisFrameFPS - fps) / fpsFilter;
+				lastUpdate = now;
+
+				var fpsOut = $('fps-counter');
+				setInterval(function(){
+					fpsOut.innerHTML = fps.toFixed(1) + "fps";
+				}, 1000);
+			};
 
 			requestAnimFrame = (function(w) {
 				return  w.requestAnimationFrame ||
@@ -20,6 +34,8 @@
 
 			window.run = function() {
 
+
+				
 			}
 
 		</script>
