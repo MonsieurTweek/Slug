@@ -1,0 +1,51 @@
+<!DOCTYPE>
+<html>
+	<head></head>
+	<body>
+		<canvas id="canvas"></canvas>
+		<script>
+			var canvas = document.getElementById('canvas');
+			var ctx = canvas.getContext('2d');
+
+			requestAnimFrame = (function(w) {
+				return  w.requestAnimationFrame ||
+				 w.webkitRequestAnimationFrame ||
+				 w.mozRequestAnimationFrame ||
+				 w.oRequestAnimationFrame ||
+				 w.msRequestAnimationFrame ||
+				 function(c,e) {
+					w.setTimeout(c, 100/6);
+				 };
+			})(window);
+
+			window.run = function() {
+				update();
+				draw();
+				requestAnimFrame(run);
+			}
+
+			window.update = function() {
+
+			}
+
+			window.draw = function() {
+				ctx.fillStyle = "rgba(0, 0, 0, 1)";
+				ctx.fillRect(player.coords.x, player.coords.y, player.bounds.w, player.bounds.h);
+			}
+
+			var Player = function() {
+				this.bounds = {
+					h:50,
+					w:50
+				},
+				this.coords = {
+					x:0,
+					y:0
+				}
+			};
+
+			player = new Player();
+			run();
+		</script>
+	</body>
+</html>
